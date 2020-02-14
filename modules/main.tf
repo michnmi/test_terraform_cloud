@@ -1,19 +1,6 @@
-provider "aws" {
-    region = "eu-west-1"
-}
-
-resource "aws_instance" "example" {
-  ami           = "ami-035966e8adab4aaad"
-  instance_type = "t2.micro"
-
-  user_data = <<-EOF
-              #!/bin/bash
-              echo "Hello, friend! Missed you!" > index.html
-              nohup busybox httpd -f -p 8080 &
-              EOF
-
-  tags = { 
-      Name = "terraform-example"
-  }
-
+resource "datadog_user" "alex_podobnik" {
+  email       = "michalis@hashicorp.com"
+  handle      = "michalis@hashicorp.com"
+  name        = "MM"
+  access_role = "adm"
 }

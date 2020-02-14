@@ -4,3 +4,7 @@ provider "datadog" {
   api_key = var.datadog_api_key
   app_key = var.testing_datadog_api
 }
+
+provider "aws" {
+    region = "eu-west-1"
+}
