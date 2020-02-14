@@ -5,7 +5,7 @@ resource "datadog_user" "alex_podobnik" {
   access_role = "adm"
 }
 
-resource "datadog_user" "Testing you can ignore me" {
+resource "datadog_user" "Martin_smith" {
   email       = "msmith@hashicorp.com"
   handle      = "msmith@hashicorp.com"
   name        = "msmith@hashicorp.com"
