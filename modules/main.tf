@@ -32,5 +32,5 @@ resource "datadog_user" "adm_users" {
   email = each.value.email
   handle = each.value.handler
   access_role = "adm"
+  is_admin    = true
 }
-
