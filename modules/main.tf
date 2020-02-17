@@ -30,6 +30,6 @@ resource "datadog_user" "adm_users" {
   for_each = var.adm_users
   name = each.value.name
   email = each.value.email
-  handler = each.value.handler
+  handle = each.value.handler
 }
 
