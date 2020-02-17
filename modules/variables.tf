@@ -6,6 +6,7 @@ variable "adm_users" {
         name = string
         email = string
         handler = string
+        access_role = "adm"
     }))
     description = "Admin user created by Terraform. Do not edit manually"
 }
