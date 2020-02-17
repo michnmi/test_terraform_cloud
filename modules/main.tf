@@ -19,9 +19,9 @@ resource "datadog_user" "zack_iles" {
   access_role = "st"
 }
 
-# resource "datadog_user" "matt_mcquillan" {
-#   email       = "matt@hashicorp1.com"
-#   handle      = "matt@hashicorp1.com"
-#   name        = "Matt McQuillan"
-#   access_role = "adm"
-# }
+resource "datadog_user" "matt_mcquillan" {
+  email       = "matt@hashicorp1.com"
+  handle      = "matt@hashicorp1.com"
+  name        = "Matt McQuillan"
+  access_role = "adm"
+}
