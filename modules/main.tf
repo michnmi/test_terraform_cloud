@@ -1,9 +1,9 @@
-resource "datadog_user" "Martin_smith" {
-  email       = "msmith@hashicorp1.com"
-  handle      = "msmith@hashicorp1.com"
-  name        = "Martin_smith"
-  access_role = "adm"
-}
+# resource "datadog_user" "Martin_smith" {
+#   email       = "msmith@hashicorp1.com"
+#   handle      = "msmith@hashicorp1.com"
+#   name        = "Martin_smith"
+#   access_role = "adm"
+# }
 
 resource "datadog_user" "will_bengston" {
   email       = "wbengtson@hashicorp1.com"
@@ -19,12 +19,12 @@ resource "datadog_user" "zack_iles" {
   access_role = "st"
 }
 
-resource "datadog_user" "matt_mcquillan" {
-  email       = "matt@hashicorp1.com"
-  handle      = "matt@hashicorp1.com"
-  name        = "Matt McQuillan"
-  access_role = "adm"
-}
+# resource "datadog_user" "matt_mcquillan" {
+#   email       = "matt@hashicorp1.com"
+#   handle      = "matt@hashicorp1.com"
+#   name        = "Matt McQuillan"
+#   access_role = "adm"
+# }
 
 resource "datadog_user" "adm_users" {
   for_each = var.adm_users
