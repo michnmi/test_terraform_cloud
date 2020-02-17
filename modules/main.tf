@@ -26,18 +26,18 @@
 #   access_role = "adm"
 # }
 
-resource "datadog_user" "adm_users" {
-  for_each = var.adm_users
-  name = each.value.name
-  email = each.value.email
-  handle = each.value.handler
-  access_role = "adm"
-}
+# resource "datadog_user" "adm_users" {
+#   for_each = var.adm_users
+#   name = each.value.name
+#   email = each.value.email
+#   handle = each.value.handler
+#   access_role = "adm"
+# }
 
-resource "datadog_user" "st_users" {
-  for_each = var.adm_users
-  name = each.value.name
-  email = each.value.email
-  handle = each.value.handler
-  access_role = "st"
-}
+# resource "datadog_user" "st_users" {
+#   for_each = var.adm_users
+#   name = each.value.name
+#   email = each.value.email
+#   handle = each.value.handler
+#   access_role = "st"
+# }
