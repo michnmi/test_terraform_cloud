@@ -1,4 +1,4 @@
-adm_users     = {
+adm_users = {
       Martin_smith = {
         name  = "Martin Smith"
         email = "msmith@hashicorp1.com"

@@ -28,8 +28,8 @@ resource "datadog_user" "matt_mcquillan" {
 
 resource "datadog_user" "adm_users" {
   for_each = var.adm_users
-  name = each.key.name
-  email = each.key.email
-  handler = each.key.handler
+  name = each.value.name
+  email = each.value.email
+  handler = each.value.handler
 }
 
