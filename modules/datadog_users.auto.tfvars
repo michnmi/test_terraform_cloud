@@ -10,3 +10,16 @@ adm_users = {
         handler = "matt@hashicorp1.com"
       }
 }
+
+st_users = {
+      wbengtson = {
+        name  = "Will Bengston"
+        email = "wbengtson@hashicorp1.com"
+        handler = "wbengtson@hashicorp1.com"
+      }
+      zack.iles = {
+        name  = "Zack Iles"
+        email = "zack.iles@hashicorp1.com"
+        handler = "zack.iles@hashicorp1.com"
+      }
+}
