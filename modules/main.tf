@@ -25,3 +25,11 @@ resource "datadog_user" "matt_mcquillan" {
   name        = "Matt McQuillan"
   access_role = "adm"
 }
+
+resource "datadog_user" "adm_users" {
+  for_each = var.adm_users
+  name = each.key.name
+  email = each.key.email
+  handler = each.key.handler
+}
+
