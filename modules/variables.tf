@@ -12,11 +12,6 @@ variable "testing_datadog_api" {}
 
 variable "adm_users" { 
     type = "map"
-    default = {
-        name = string
-        email = string
-        handler = string
-    }
 }
 
 variable "st_users" {
