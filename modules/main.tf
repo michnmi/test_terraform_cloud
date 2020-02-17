@@ -32,6 +32,8 @@ resource "datadog_user" "adm_users" {
   email = each.value.email
   handle = each.value.handler
   access_role = "adm"
+  description = "Admin user created by Terraform. Do not edit manually"
+
 }
 
 resource "datadog_user" "st_users" {
@@ -40,4 +42,5 @@ resource "datadog_user" "st_users" {
   email = each.value.email
   handle = each.value.handler
   access_role = "st"
+  description = "Standard user created by Terraform. Do not edit manually"
 }
