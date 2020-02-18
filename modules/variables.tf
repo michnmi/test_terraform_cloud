@@ -8,3 +8,6 @@ variable "adm_users" {
 variable "st_users" {
     type = map
 }
+variable "integrations" {
+    type = set
+}
