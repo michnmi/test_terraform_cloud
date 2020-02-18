@@ -9,5 +9,5 @@ variable "st_users" {
     type = map
 }
 variable "integrations" {
-    type = set
+    type = set(strings)
 }
