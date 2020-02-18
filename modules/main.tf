@@ -41,8 +41,8 @@ resource "datadog_user" "st_users" {
   handle = each.value.handler
   access_role = "st"
 }
-
-resource "datadog_logs_integration_pipeline" "integrations" {
-    for_each = var.integrations
-    is_enabled = true
-}
+# Not really creating these. They are constructed automatically 
+# resource "datadog_logs_integration_pipeline" "integrations" {
+#     for_each = var.integrations
+#     is_enabled = true
+# }
