@@ -49,10 +49,10 @@ resource "datadog_user" "st_users" {
 
 resource "datadog_logs_custom_pipeline" "custom_pipelines" {
   for_each = var.custom_pipelines
-  # dynamic "filter"{
-  #   for_each = [for filter in custom_pipelines.filter: {
-
-  #   }]
+  dynamic "filter"{
+    for_each = [for filter in custom_pipelines.filter: {
+      query = filter.query
+    }]
   }
   # filter = each.value.filter
   # name = each.value.name
