@@ -49,8 +49,13 @@ resource "datadog_user" "st_users" {
 
 resource "datadog_logs_custom_pipeline" "custom_pipelines" {
   for_each = var.custom_pipelines
-  filter = each.value.filter
-  name = each.value.name
-  is_enabled = true
-  processor = each.value.processor
+  # dynamic "filter"{
+  #   for_each = [for filter in custom_pipelines.filter: {
+
+  #   }]
+  }
+  # filter = each.value.filter
+  # name = each.value.name
+  # is_enabled = true
+  # processor = each.value.processor
 }
