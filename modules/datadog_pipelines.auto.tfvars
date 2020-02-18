@@ -12,7 +12,7 @@ custom_pipelines = {
         processors = [{
           name = "terraform output: %{line} - in attribute prefixed_line"
           is_enabled = "true"
-          template = "terraform output: %{line}"
+          template = "terraform output: %{line}" 
           target = "prefixed_line"
           type = "string-builder-processor"
         }]
