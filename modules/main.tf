@@ -47,15 +47,35 @@ resource "datadog_user" "st_users" {
 #     is_enabled = true
 # }
 
-resource "datadog_logs_custom_pipeline" "custom_pipelines" {
-  for_each = var.custom_pipelines
-  dynamic "filter"{
-    for_each = [for filter in custom_pipelines.filter: {
-      query = filter.query
-    }]
+resource "datadog_logs_custom_pipeline" "cadence_worker-cadence_shared" {
+  filter {
+    query = "service:(cloud-cadence-worker OR cloud-cadence-shared)"
   }
-  # filter = each.value.filter
-  # name = each.value.name
-  # is_enabled = true
-  # processor = each.value.processor
+  name = "cadence-worker, cadence-shared"
+  is_enabled = true
+  processor {
+    pipeline {
+      name = "Terraform"
+      is_enabled = false
+      filter {
+        query = "@msg:\"terraform output\""
+      }
+      processor {
+        string_builder_processor {
+          target = "prefixed_line"
+          template = "terraform output: %%{line}"
+          name = "terraform output: %%{line} - in attribute prefixed_line"
+          is_enabled = true
+          is_replace_missing = true
+        }
+        message_remapper {
+          sources = ["prefixed_line"]
+          name = "Output Line"
+          is_enabled = true
+        }
+      }
+    }
+
+  }
+
 }
