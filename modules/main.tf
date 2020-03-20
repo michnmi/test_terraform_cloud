@@ -92,21 +92,21 @@ resource "datadog_logs_custom_pipeline" "cadence-worker_cadence-shared" {
             }
             is_enabled = false
             name = "Terraform"
-        }
-        processor {
-            string_builder_processor {
-                target = "prefixed_line"
-                is_replace_missing = true
-                is_enabled = true
-                template = "terraform output: %%{line}"
-                name = "terraform output: %%{line} - in attribute prefixed_line"
+            processor {
+                string_builder_processor {
+                    target = "prefixed_line"
+                    is_replace_missing = true
+                    is_enabled = true
+                    template = "terraform output: %%{line}"
+                    name = "terraform output: %%{line} - in attribute prefixed_line"
+                }
             }
-        }
-        processor {
-            message_remapper {
-                sources = ["prefixed_line"]
-                is_enabled = true
-                name = "Output Line"
+            processor {
+                message_remapper {
+                    sources = ["prefixed_line"]
+                    is_enabled = true
+                    name = "Output Line"
+                }
             }
         }
     }
