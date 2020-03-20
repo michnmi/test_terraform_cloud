@@ -116,7 +116,7 @@ resource "datadog_logs_custom_pipeline" "cadence-worker_cadence-shared" {
         }
     }
     processor {
-        grok-parser {
+        grok_parser {
             samples = ["2019-12-19T12:58:39.895Z [WARN]  interrupt received, shutting down"]
             source = "message"
             is_enabled = true
@@ -143,7 +143,7 @@ resource "datadog_logs_custom_pipeline" "cadence-worker_cadence-shared" {
     }
     processor {
         message_remapper {
-            sources = "msg"
+            sources = ["msg"]
             is_enabled = true
             name = "Last attempt to match msg"
         }
