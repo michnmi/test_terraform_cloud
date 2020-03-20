@@ -100,6 +100,7 @@ resource "datadog_logs_custom_pipeline" "cadence-worker_cadence-shared" {
                 is_enabled = true
                 template = "terraform output: %%{line}"
                 name = "terraform output: %%{line} - in attribute prefixed_line"
+            }
         }
         processor {
             message_remapper {
