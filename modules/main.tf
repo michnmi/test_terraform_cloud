@@ -105,7 +105,7 @@ resource "datadog_logs_custom_pipeline" "cadence-worker_cadence-shared" {
                 message_remapper {
                     sources = ["prefixed_line"]
                     is_enabled = true
-                    name = "Output Line"
+                    name = " Output Line"
                 }
             }
         }
