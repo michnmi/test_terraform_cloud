@@ -79,7 +79,7 @@
 #   }
 
 # }
-resource "datadog_logs_custom_pipeline" "cadence-worker, cadence-shared" {
+resource "datadog_logs_custom_pipeline" "cadence-worker_cadence-shared" {
     filter {
         query = "service:(cloud-cadence-worker OR cloud-cadence-shared)"
     }
