@@ -114,7 +114,4 @@ resource "datadog_logs_custom_pipeline" "cadence-matching_and_cadence-history" {
             name = "Define level as status attribute"
         }
     }
-
-
-
-
+}
