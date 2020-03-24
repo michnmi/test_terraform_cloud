@@ -116,7 +116,7 @@ resource "datadog_logs_custom_pipeline" "cadence-matching_and_cadence-history" {
     }
 }
 
-resource "datadog_logs_custom_pipeline" "Traefik_with_unquoted_access_log_fixes_don.t_use_builtin_integration" {
+resource "datadog_logs_custom_pipeline" "Traefik_with_unquoted_access_log_fixes_dont_use_builtin_integration" {
     filter {
         query = "source:traefik"
     }
