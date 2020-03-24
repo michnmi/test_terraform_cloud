@@ -131,7 +131,7 @@ resource "datadog_logs_custom_pipeline" "Traefik_with_unquoted_access_log_fixes_
                 "10.0.11.71 - - [13/Mar/2020:19:41:31 +0000] \"GET / HTTP/1.1\" - - \"-\" \"-\" 392171 - - 0ms"
                 ]
             source = "message"
-            grok = {
+            grok {
                 support_rules = "_duration %%{number:duration:scale(1000000)}\n_traefik_backend_url %%{notSpace:traefik.backend_url}\n_traefik_name %%{regex(\"[^\\\\\\\"]*\"):traefik.name}\n_total_request %%{number:traefik.request_total}\n_auth %%{notSpace:http.auth:nullIf(\"-\")}\n_bytes_written %%{integer:network.bytes_written}\n_client_ip %%{ipOrHost:network.client.ip}\n_version HTTP\\/%%{regex(\"\\\\d+\\\\.\\\\d+\"):http.version}\n_url %%{notSpace:http.url}\n_ident %%{notSpace:http.ident:nullIf(\"-\")}\n_user_agent %%{regex(\"[^\\\\\\\"]*\"):http.useragent}\n_referer %%{notSpace:http.referer}\n_status_code %%{integer:http.status_code}\n_method %%{word:http.method}\n_date_access %%{date(\"dd/MMM/yyyy:HH:mm:ss Z\"):date_access}\n"
                 match_rules = "access.common %%{_client_ip} %%{_ident} %%{_auth} \\[%%{_date_access}\\] \"(?>%%{_method} |)%%{_url}(?> %%{_version}|)\" %%{_status_code} (?>%%{_bytes_written}|-) \"%%{_referer}\" \"%%{_user_agent}\" %%{_total_request} \"%%{_traefik_name}\" \"?%%{_traefik_backend_url}(\"|“)? %%{_duration}ms.*\n\naccess.common2 %%{_client_ip} %%{_ident} %%{_auth} \\[%%{_date_access}\\] \"(?>%%{_method} |)%%{_url}(?> %%{_version}|)\" (%%{_status_code}|-) (?>%%{_bytes_written}|-) \"%%{_referer}\" \"%%{_user_agent}\" %%{_total_request} \"?%%{_traefik_name}\"? \"?%%{_traefik_backend_url}(\"|“)? %%{_duration}ms.*\n\ndata_keyvalue %%{data::keyvalue}"
             }
@@ -259,7 +259,30 @@ resource "datadog_logs_custom_pipeline" "Traefik_with_unquoted_access_log_fixes_
         category_processor {
             name = "Categorise status code"
             is_enabled = true
-            categories = [{filter: {query: "@http.status_code:[200 TO 299]"}, name: "OK"}, {filter: {query: "@http.status_code:[300 TO 399]"}, name: "notice"}, {filter: {query: "@http.status_code:[400 TO 499]"}, name: "warning"}, {filter: {query: "@http.status_code:[500 TO 599]"}, name: "error"}]
+            category {
+                name = "OK"
+                filter {
+                    query = "@http.status_code:[200 TO 299]"
+                }
+            }
+            category {
+                name = "notice"
+                filter {
+                    query = "@http.status_code:[300 TO 399]"
+                }
+            }
+            category {
+                name = "warning"
+                filter {
+                    query = "@http.status_code:[400 TO 499]"
+                }
+            }
+            category {
+                name = "error"
+                filter {
+                    query = "@http.status_code:[500 TO 599]"
+                }
+            }
             target = "http.status_category"
         }
     }
