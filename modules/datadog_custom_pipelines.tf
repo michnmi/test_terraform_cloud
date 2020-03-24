@@ -293,13 +293,4 @@ resource "datadog_logs_custom_pipeline" "Traefik_with_unquoted_access_log_fixes_
             sources = ["http.status_category", "level"]
         }
     }
-    processor {
-        url_parser {
-            name = "name"
-            is_enabled = true
-            sources = ["http.url"]
-            target = "http.url_details"
-            normalize_ending_slashes = false
-        }
-    }
 }
