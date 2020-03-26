@@ -1,5 +1,7 @@
 variable "datadog_api_key" {}
 variable "testing_datadog_api" {}
+variable "env" {}
+
 
 variable "adm_users" { 
     type = map
@@ -16,5 +18,3 @@ variable "integrations" {
 variable "custom_pipelines" {
     type = map
 }
-
-variable "env" == "prod"
