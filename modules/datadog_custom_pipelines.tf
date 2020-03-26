@@ -294,7 +294,7 @@ resource "datadog_logs_custom_pipeline" "Traefik_with_unquoted_access_log_fixes_
         }
     }
 }
-resource "datadog_logs_custom_pipeline" "cloud_consul-ama,operation,provider,blob,data-plane-config,network,region,consul-service,host-manager-service,image" {
+resource "datadog_logs_custom_pipeline" "cloud_consul-ama_operation_provider_blob_data-plane-config_network_region_consul-service_host-manager-service_image" {
     filter {
         query = "service:(cloud-consul-ama OR cloud-operation OR cloud-provider OR cloud-blob OR cloud-data-plane-config OR cloud-network OR cloud-region OR cloud-consul-service OR cloud-image-service OR cloud-host-manager-service)"
     }
