@@ -16,3 +16,5 @@ variable "integrations" {
 variable "custom_pipelines" {
     type = map
 }
+
+variable "env" == "prod"
