@@ -294,6 +294,7 @@ resource "datadog_logs_custom_pipeline" "Traefik_with_unquoted_access_log_fixes_
         }
     }
 }
+
 resource "datadog_logs_custom_pipeline" "cloud_consul-ama_operation_provider_blob_data-plane-config_network_region_consul-service_host-manager-service_image" {
     filter {
         query = "service:(cloud-consul-ama OR cloud-operation OR cloud-provider OR cloud-blob OR cloud-data-plane-config OR cloud-network OR cloud-region OR cloud-consul-service OR cloud-image-service OR cloud-host-manager-service)"
@@ -341,6 +342,7 @@ resource "datadog_logs_custom_pipeline" "cloud_consul-ama_operation_provider_blo
         }
     }
 }
+
 resource "datadog_logs_custom_pipeline" "Vault_custom" {
     filter {
         query = "service:vault"
@@ -384,3 +386,46 @@ resource "datadog_logs_custom_pipeline" "Vault_custom" {
         }
     }
 }
+
+resource "datadog_logs_custom_pipeline" "consul-host-manager" {
+    filter {
+        query = "service:consul-host-manager"
+    }
+    is_enabled = true
+    name = "consul-host-manager"
+    processor {
+        grok_parser {
+            name = "Grok Parser for syslog-like lines"
+            is_enabled = true
+            source = "message"
+            samples = [
+                "2019-12-19T14:22:41.149Z [INFO]  discover: successfully wrote retry join configuration: path=/etc/consul.d/join.json"
+            ]
+            grok {
+                support_rules = ""
+                match_rules = "rule %%{date(\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\"):date} \\[%%{word:level}\\] +%%{notSpace:component}: %%{data:msg}"
+            }
+        }
+    }
+    processor {
+        status_remapper {
+            name = "Define @level as official status field"
+            is_enabled = true
+            sources = ["@level", "level"]
+        }
+    }
+    processor {
+        date_remapper {
+            name = "Define @timestamp as official Date field"
+            is_enabled = true
+            sources = ["@timestamp", "date"]
+        }
+    }
+    processor {
+        message_remapper {
+            name = "Define @message as official Message field"
+            is_enabled = true
+            sources = ["@message", "msg"]
+        }
+    }
+}s
