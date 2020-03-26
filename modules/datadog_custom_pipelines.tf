@@ -1,4 +1,5 @@
 resource "datadog_logs_custom_pipeline" "Xle-gi5iRGKTWpr2Jr5qGw" {
+  count       = local.env == "prod" ? 1 : 0
   filter {
     query = "service:(cloud-cadence-worker OR cloud-cadence-shared)"
   }
