@@ -356,8 +356,10 @@ resource "datadog_logs_custom_pipeline" "Vault_custom" {
                 "2019-12-19T13:57:27.915Z [ERROR] core: failed to acquire lock: error=\"failed to create session: Unexpected response code: 500 (No known Consul servers)\""
             ]
             # grok = "{'support_rules': '', 'match_rules': 'rule %{date("yyyy-MM-dd\'T\'HH:mm:ss.SSSZ"):date} \\[%{word:level}\\] +%{notSpace:component}: %{data:msg}'}"
-            support_rules = ""
-            match_rules = "rule %%{date(\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\"):date} \\[%%{word:level}\\] +%%{notSpace:component}: %%{data:msg}"
+            grok {
+                support_rules = ""
+                match_rules = "rule %%{date(\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\"):date} \\[%%{word:level}\\] +%%{notSpace:component}: %%{data:msg}"
+            }
         }
     }
     processor {
