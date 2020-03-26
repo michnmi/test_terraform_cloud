@@ -428,4 +428,4 @@ resource "datadog_logs_custom_pipeline" "consul-host-manager" {
             sources = ["@message", "msg"]
         }
     }
-}s
+}
