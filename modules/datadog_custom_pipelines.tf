@@ -429,3 +429,42 @@ resource "datadog_logs_custom_pipeline" "consul-host-manager" {
         }
     }
 }
+
+resource "datadog_logs_custom_pipeline" "cloud-scada-broker" {
+    filter {
+        query = "service:cloud-scada-broker"
+    }
+    is_enabled = true
+    name = "cloud-scada-broker"
+    processor {
+        grok_parser {
+            name = "Parse scada line"
+            is_enabled = true
+            source = "message"
+            # samples = ["2020-02-03T19:44:45.868Z [DEBUG] server.session: cleaered registry entry: session_id=a3b063bf-6fd0-9cf9-b9d6-d2bc15bc63e1", "2020-02-03T19:43:15.589Z [DEBUG] server.client_rpc: session established: remote_addr=10.0.75.204:43636 session_id=a3b063bf-6fd0-9cf9-b9d6-d2bc15bc63e1"]
+            # grok = "{'support_rules': '', 'match_rules': 'rule_01 %{date("yyyy-MM-dd\'T\'HH:mm:ss.SSSZ"):timestamp} \\[%{word:level}\\] %{notSpace:event.source}: %{data:event.name}:( remote_addr=%{ipv4:remote.addr}:%{port:remote.port})? session_id=%{word:session_id}.*'}"
+            samples = [
+                "2020-02-03T19:44:45.868Z [DEBUG] server.session: cleaered registry entry: session_id=a3b063bf-6fd0-9cf9-b9d6-d2bc15bc63e1",
+                "2020-02-03T19:43:15.589Z [DEBUG] server.client_rpc: session established: remote_addr=10.0.75.204:43636 session_id=a3b063bf-6fd0-9cf9-b9d6-d2bc15bc63e1"
+            ]
+            grok {
+                support_rules = ""
+                match_rules = "rule_01 %%{date(\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\"):timestamp} \\[%%{word:level}\\] %%{notSpace:event.source}: %%{data:event.name}:( remote_addr=%%{ipv4:remote.addr}:%%{port:remote.port})? session_id=%%{word:session_id}.*"
+            }
+        }
+    }
+    processor {
+        status_remapper {
+            name = "Map 'level' to builtin 'Status'"
+            is_enabled = true
+            sources = ["level"]
+        }
+    }
+    processor {
+        date_remapper {
+            name = "Map 'timestamp' to Date"
+            is_enabled = true
+            sources = ["timestamp"]
+        }
+    }
+}
