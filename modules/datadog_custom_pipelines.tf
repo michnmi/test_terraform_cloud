@@ -341,3 +341,44 @@ resource "datadog_logs_custom_pipeline" "cloud_consul-ama_operation_provider_blo
         }
     }
 }
+resource "datadog_logs_custom_pipeline" "Vault_custom" {
+    filter {
+        query = "service:vault"
+    }
+    name = "Vault"
+    is_enabled = true
+    processor {
+        grok_parser {
+            name = "Grok Parser for syslog-like lines"
+            is_enabled = true
+            source = "message"
+            samples = [
+                "2019-12-19T13:57:27.915Z [ERROR] core: failed to acquire lock: error=\"failed to create session: Unexpected response code: 500 (No known Consul servers)\""
+            ]
+            # grok = "{'support_rules': '', 'match_rules': 'rule %{date("yyyy-MM-dd\'T\'HH:mm:ss.SSSZ"):date} \\[%{word:level}\\] +%{notSpace:component}: %{data:msg}'}"
+            support_rules = ""
+            match_rules = "rule %%{date(\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\"):date} \\[%%{word:level}\\] +%%{notSpace:component}: %%{data:msg}"
+        }
+    }
+    processor {
+        date_remapper {
+            name = "Assign date to official Date field"
+            is_enabled = true
+            sources = ["date"]
+        }
+    }
+    processor {
+        status_remapper {
+            name = "Define level as standard status"
+            is_enabled = true
+            sources = ["level"]
+        }
+    }
+    processor {
+        message_remapper {
+            name = "Assign msg to official Message field"
+            is_enabled = true
+            sources = ["msg"]
+        }
+    }
+}
