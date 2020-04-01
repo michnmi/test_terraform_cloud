@@ -1,5 +1,4 @@
-resource "datadog_logs_custom_pipeline" "Xle-gi5iRGKTWpr2Jr5qGw" {
-  count = var.env == "prod" ? 1 : 0
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_cadence_worker_cadence_shared" {
   filter {
     query = "service:(cloud-cadence-worker OR cloud-cadence-shared)"
   }
@@ -72,7 +71,7 @@ resource "datadog_logs_custom_pipeline" "Xle-gi5iRGKTWpr2Jr5qGw" {
   }
 }
 
-resource "datadog_logs_custom_pipeline" "ym8K1pS8Q9C8d3VQgUg1bw" {
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_cadence_matching_and_cadence_history" {
   filter {
     query = "service:(cadence-matching OR cadence-server)"
   }
@@ -117,7 +116,7 @@ resource "datadog_logs_custom_pipeline" "ym8K1pS8Q9C8d3VQgUg1bw" {
   }
 }
 
-resource "datadog_logs_custom_pipeline" "K8gQkwvoRieR9m4WD0bqyw" {
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_Traefik_with_unquoted_access_log_fixes" {
   filter {
     query = "source:traefik"
   }
@@ -296,7 +295,7 @@ resource "datadog_logs_custom_pipeline" "K8gQkwvoRieR9m4WD0bqyw" {
   }
 }
 
-resource "datadog_logs_custom_pipeline" "BR84vkvKRnyPtfZhEh1W-A" {
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_consul-ama_operation_provider_blob_data-plane-config_network_region_consul-service_host-manager-service_image" {
   filter {
     query = "service:(cloud-consul-ama OR cloud-operation OR cloud-provider OR cloud-blob OR cloud-data-plane-config OR cloud-network OR cloud-region OR cloud-consul-service OR cloud-image-service OR cloud-host-manager-service)"
   }
@@ -342,7 +341,7 @@ resource "datadog_logs_custom_pipeline" "BR84vkvKRnyPtfZhEh1W-A" {
   }
 }
 
-resource "datadog_logs_custom_pipeline" "l5G_YDvuTx-fCUY-4esQ-g" {
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_Vault_Custom" {
   filter {
     query = "service:vault"
   }
@@ -386,7 +385,7 @@ resource "datadog_logs_custom_pipeline" "l5G_YDvuTx-fCUY-4esQ-g" {
   }
 }
 
-resource "datadog_logs_custom_pipeline" "sNvpdaINRxaYdHSyt-jOfg" {
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_consul-host-manager" {
   filter {
     query = "service:consul-host-manager"
   }
@@ -429,7 +428,7 @@ resource "datadog_logs_custom_pipeline" "sNvpdaINRxaYdHSyt-jOfg" {
   }
 }
 
-resource "datadog_logs_custom_pipeline" "e7kuCRqKTJ-cfJpND_eqjA" {
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_cloud-scada-broker" {
   filter {
     query = "service:cloud-scada-broker"
   }
@@ -466,7 +465,7 @@ resource "datadog_logs_custom_pipeline" "e7kuCRqKTJ-cfJpND_eqjA" {
   }
 }
 
-resource "datadog_logs_custom_pipeline" "iT1DRSAHTKaD36AGTad2YQ" {
+resource "datadog_logs_custom_pipeline" "datadog_custom_pipeline_docker" {
   filter {
     query = "service:dockerd"
   }
